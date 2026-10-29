@@ -33,11 +33,18 @@ def main() -> None:
                             special_tokens=["[PAD]", "[UNK]", "[CLS]", "[SEP]", "[MASK]"])
     os.makedirs(args.out, exist_ok=True)
     tok.save_model(args.out)
-    hf = BertTokenizerFast(vocab_file=os.path.join(args.out, "vocab.txt"),
+    # Build from the trained object: under transformers 5, BertTokenizerFast(vocab_file=...) loads
+    # only the special tokens and turns every Hindi word into [UNK].
+    hf = BertTokenizerFast(tokenizer_object=tok._tokenizer, unk_token="[UNK]", sep_token="[SEP]",
+                           pad_token="[PAD]", cls_token="[CLS]", mask_token="[MASK]",
                            do_lower_case=False, strip_accents=False, tokenize_chinese_chars=False)
     hf.save_pretrained(args.out)
+    reloaded = BertTokenizerFast.from_pretrained(args.out)
     sample = "भारत की राजधानी नई दिल्ली है।"
-    print(sample, "->", hf.tokenize(sample))
+    toks = reloaded.tokenize(sample)
+    print(sample, "->", toks, "| vocab", reloaded.vocab_size)
+    if "[UNK]" in toks or reloaded.vocab_size != args.vocab_size:
+        raise SystemExit("tokenizer canary failed")
 
 
 if __name__ == "__main__":

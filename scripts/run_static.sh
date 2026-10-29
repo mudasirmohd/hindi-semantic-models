@@ -8,7 +8,13 @@ OUT=results/intrinsic.jsonl
 mkdir -p models results
 if ! grep -q '"model": "cc.hi.300 (Facebook)"' $OUT 2>/dev/null; then
   echo "[$(date +%T)] baseline cc.hi.300"
-  $PY -I scripts/eval_intrinsic.py --model /home/mudasir/projects/hindi-summarizer/cc.hi.300.bin --name "cc.hi.300 (Facebook)" --out $OUT
+  # Word vectors only (.vec): the 6.9 GB .bin with subword buckets exceeds WSL memory when loaded.
+  if [ ! -f data/baseline/cc.hi.300.kv ]; then
+    mkdir -p data/baseline
+    curl -sSL -o data/baseline/cc.hi.300.vec.gz https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.hi.300.vec.gz
+    $PY -I -c "from gensim.models import KeyedVectors as K; K.load_word2vec_format('data/baseline/cc.hi.300.vec.gz').save('data/baseline/cc.hi.300.kv')"
+  fi
+  $PY -I scripts/eval_intrinsic.py --model data/baseline/cc.hi.300.kv --name "cc.hi.300 (Facebook)" --out $OUT
 fi
 for spec in "word2vec surface" "word2vec stem" "fasttext surface" "fasttext stem"; do
   set -- $spec; algo=$1; view=$2

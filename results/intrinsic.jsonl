@@ -1,0 +1,1 @@
+{"model": "cc.hi.300 (Facebook)", "path": "data/baseline/cc.hi.300.kv", "stem": false, "vocab": 1876653, "ws_spearman": 0.5508, "ws_pairs_used": 235, "ws_pairs_oov": 0, "analogy_acc": 0.2677, "analogy_covered": 21208, "analogy_total": 26914, "hinexsum_token_coverage": 0.9716, "hinexsum_tokens": 50434}
