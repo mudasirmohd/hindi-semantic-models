@@ -1,0 +1,7 @@
+.venv/
+.venv-bert/
+data/
+models/
+logs/
+__pycache__/
+*.pyc
