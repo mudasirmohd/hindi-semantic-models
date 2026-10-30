@@ -1,0 +1,20 @@
+{"model": "hi-w2v-sg-surface-300", "dataset": "XL-Sum", "split": "val", "r1_gap": -0.0001, "r1_gap_ci95": [-0.0031, 0.003], "significant": false}
+{"model": "hi-w2v-sg-stem-300", "dataset": "XL-Sum", "split": "val", "r1_gap": -0.0007, "r1_gap_ci95": [-0.0037, 0.0022], "significant": false}
+{"model": "hi-ft-sg-surface-300", "dataset": "XL-Sum", "split": "val", "r1_gap": -0.0003, "r1_gap_ci95": [-0.0032, 0.0027], "significant": false}
+{"model": "hi-ft-sg-stem-300", "dataset": "XL-Sum", "split": "val", "r1_gap": -0.0006, "r1_gap_ci95": [-0.0031, 0.0019], "significant": false}
+{"model": "hi-w2v-sg-surface-300", "dataset": "ILSUM 2.0", "split": "val", "r1_gap": -0.0017, "r1_gap_ci95": [-0.009, 0.0068], "significant": false}
+{"model": "hi-w2v-sg-stem-300", "dataset": "ILSUM 2.0", "split": "val", "r1_gap": 0.0031, "r1_gap_ci95": [-0.0033, 0.0104], "significant": false}
+{"model": "hi-ft-sg-surface-300", "dataset": "ILSUM 2.0", "split": "val", "r1_gap": 0.0002, "r1_gap_ci95": [-0.0075, 0.0087], "significant": false}
+{"model": "hi-ft-sg-stem-300", "dataset": "ILSUM 2.0", "split": "val", "r1_gap": 0.002, "r1_gap_ci95": [-0.0052, 0.0104], "significant": false}
+{"model": "hi-bert-medium", "dataset": "XL-Sum", "split": "val", "r1_gap": 0.0001, "r1_gap_ci95": [-0.0028, 0.0027], "significant": false}
+{"model": "hi-bert-medium", "dataset": "ILSUM 2.0", "split": "val", "r1_gap": 0.0059, "r1_gap_ci95": [-0.002, 0.0148], "significant": false}
+{"model": "hi-w2v-sg-surface-300", "dataset": "XL-Sum", "split": "test", "r1_gap": -0.0023, "r1_gap_ci95": [-0.0053, 0.0008], "significant": false}
+{"model": "hi-w2v-sg-stem-300", "dataset": "XL-Sum", "split": "test", "r1_gap": 0.001, "r1_gap_ci95": [-0.0015, 0.0035], "significant": false}
+{"model": "hi-ft-sg-surface-300", "dataset": "XL-Sum", "split": "test", "r1_gap": -0.0006, "r1_gap_ci95": [-0.0031, 0.0018], "significant": false}
+{"model": "hi-ft-sg-stem-300", "dataset": "XL-Sum", "split": "test", "r1_gap": 0.0011, "r1_gap_ci95": [-0.0014, 0.0035], "significant": false}
+{"model": "hi-w2v-sg-surface-300", "dataset": "ILSUM 2.0", "split": "test", "r1_gap": 0.0013, "r1_gap_ci95": [-0.0053, 0.0082], "significant": false}
+{"model": "hi-w2v-sg-stem-300", "dataset": "ILSUM 2.0", "split": "test", "r1_gap": 0.0021, "r1_gap_ci95": [-0.004, 0.0085], "significant": false}
+{"model": "hi-ft-sg-surface-300", "dataset": "ILSUM 2.0", "split": "test", "r1_gap": 0.0029, "r1_gap_ci95": [-0.0035, 0.0097], "significant": false}
+{"model": "hi-ft-sg-stem-300", "dataset": "ILSUM 2.0", "split": "test", "r1_gap": 0.001, "r1_gap_ci95": [-0.0063, 0.0084], "significant": false}
+{"model": "hi-bert-medium", "dataset": "XL-Sum", "split": "test", "r1_gap": -0.0003, "r1_gap_ci95": [-0.0033, 0.0025], "significant": false}
+{"model": "hi-bert-medium", "dataset": "ILSUM 2.0", "split": "test", "r1_gap": -0.0003, "r1_gap_ci95": [-0.0089, 0.008], "significant": false}

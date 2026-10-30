@@ -29,4 +29,4 @@ for spec in "word2vec surface" "word2vec stem" "fasttext surface" "fasttext stem
     $PY -I scripts/eval_intrinsic.py --model models/$name.kv --name $name $stemflag --out $OUT
   fi
 done
-echo "[$(date +%T)] STATIC_DONE"
+echo "[$(date +%T)] STATIC_DONE"; touch STATIC_DONE
