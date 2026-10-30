@@ -8,3 +8,6 @@ __pycache__/
 EXTRINSIC_DONE
 STATIC_DONE
 results/cache/
+release/
+EXTENSION_DONE
+AFTER_DONE
