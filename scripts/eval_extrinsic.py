@@ -40,6 +40,7 @@ H = os.environ.get("HINEXSUM_HOME", os.path.expanduser("~/projects/hindi-summari
 EXP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(EXP, "results/extrinsic.jsonl")
 PERDOC = os.path.join(EXP, "results/perdoc")
+SUMMARIES = os.path.join(EXP, "results/summaries")
 POS_CACHE = os.path.join(EXP, "results/cache/pos_counts.json")
 BASELINE = "cc.hi.300 (Facebook)"
 STATIC = ["hi-w2v-sg-surface-300", "hi-w2v-sg-stem-300", "hi-ft-sg-surface-300", "hi-ft-sg-stem-300"]
@@ -187,10 +188,16 @@ def main() -> None:
     ap.add_argument("--dataset", required=True, choices=["XL-Sum", "ILSUM 2.0"])
     ap.add_argument("--split", required=True, choices=["val", "test"])
     ap.add_argument("--limit", type=int, default=N_DOCS, help="smoke tests only; results are not recorded unless 200")
+    ap.add_argument("--regenerate", action="store_true",
+                    help="re-run a recorded (backend, set) only to save its summaries; the run is deterministic and "
+                         "must reproduce the recorded per-document ROUGE exactly, and no result row is added")
     args = ap.parse_args()
 
-    record = args.limit == N_DOCS
-    if not record and args.split == "test":
+    record = args.limit == N_DOCS and not args.regenerate
+    if args.regenerate:
+        if args.limit != N_DOCS or not os.path.exists(perdoc_path(args.name, args.dataset, args.split)):
+            sys.exit("--regenerate needs a recorded result for this backend and set, at the full 200 documents")
+    elif not record and args.split == "test":
         sys.exit("smoke tests run on validation sets only; test sets are scored once, in full")
     done = {(r["model"], r["dataset"], r["split"]) for r in rows()}
     if record and (args.name, args.dataset, args.split) in done:
@@ -226,7 +233,7 @@ def main() -> None:
     docs = load_docs(args.dataset, args.split, args.limit)
     log(f"{args.name} | {args.dataset} {args.split} | {len(docs)} docs | {selection}")
 
-    per_doc, t0 = [], time.time()
+    per_doc, summaries, t0 = [], [], time.time()
     try:
         for i, (text, ref) in enumerate(docs, 1):
             if encoder is None:
@@ -244,11 +251,30 @@ def main() -> None:
             else:
                 summary = ""
             per_doc.append(rouge_scores(summary, [ref]))
+            summaries.append(summary)
             if i % 25 == 0:
                 log(f"  {i}/{len(docs)}  ({(time.time() - t0) / i:.1f}s/doc)")
                 save_pos()
     finally:
         save_pos()
+
+    def save_summaries():
+        os.makedirs(SUMMARIES, exist_ok=True)
+        path = perdoc_path(args.name, args.dataset, args.split).replace(PERDOC, SUMMARIES)
+        with open(path, "w", encoding="utf-8") as fh:
+            for j, sm in enumerate(summaries):
+                fh.write(json.dumps({"doc": j, "summary": sm}, ensure_ascii=False) + "\n")
+
+    if args.regenerate:
+        with open(perdoc_path(args.name, args.dataset, args.split), encoding="utf-8") as fh:
+            old = [json.loads(l) for l in fh]
+        same = len(old) == len(per_doc) and all(
+            abs(o[m]["f"] - n[m]["f"]) < 1e-12 for o, n in zip(old, per_doc) for m in METRICS)
+        if not same:
+            sys.exit(f"REGENERATE MISMATCH: {args.name} {args.dataset} {args.split} did not reproduce; summaries not saved")
+        save_summaries()
+        log(f"regenerated {args.name} {args.dataset} {args.split}: identical per-document ROUGE; summaries saved")
+        return
 
     avg = average_scores(per_doc)
     r1 = np.array([s["rouge-1"]["f"] for s in per_doc])
@@ -273,6 +299,7 @@ def main() -> None:
     if not record:
         log(f"smoke test ({args.limit} docs): not recorded")
         return
+    save_summaries()
     os.makedirs(PERDOC, exist_ok=True)
     with open(perdoc_path(args.name, args.dataset, args.split), "w", encoding="utf-8") as fh:
         for s in per_doc:
