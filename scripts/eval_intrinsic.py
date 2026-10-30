@@ -9,12 +9,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 
 import numpy as np
 from scipy.stats import spearmanr
 
-sys.path.insert(0, "/home/mudasir/projects/hindi-summarizer/code")
+sys.path.insert(0, os.path.join(os.environ.get("HINEXSUM_HOME", os.path.expanduser("~/projects/hindi-summarizer")), "code"))
 from hinexsum import preprocessing as pp  # noqa: E402
 
 
@@ -95,7 +96,7 @@ def main() -> None:
     ap.add_argument("--stem", action="store_true", help="model was trained on stemmed tokens")
     ap.add_argument("--ws", default="data/eval_sets/Hindi-WS.txt")
     ap.add_argument("--analogy", default="data/eval_sets/questions-words-hi.txt")
-    ap.add_argument("--coverage-jsonl", default="/home/mudasir/projects/hindi-summarizer/xlsum_hindi_val.jsonl")
+    ap.add_argument("--coverage-jsonl", default=os.path.join(os.environ.get("HINEXSUM_HOME", os.path.expanduser("~/projects/hindi-summarizer")), "xlsum_hindi_val.jsonl"))
     ap.add_argument("--coverage-docs", type=int, default=200)
     ap.add_argument("--out", required=True, help="JSONL file to append the result row to")
     args = ap.parse_args()

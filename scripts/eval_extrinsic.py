@@ -36,7 +36,7 @@ import time
 
 import numpy as np
 
-H = os.path.expanduser("~/projects/hindi-summarizer")
+H = os.environ.get("HINEXSUM_HOME", os.path.expanduser("~/projects/hindi-summarizer"))
 EXP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(EXP, "results/extrinsic.jsonl")
 PERDOC = os.path.join(EXP, "results/perdoc")

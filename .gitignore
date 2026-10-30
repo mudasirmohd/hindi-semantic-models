@@ -5,3 +5,6 @@ models/
 logs/
 __pycache__/
 *.pyc
+EXTRINSIC_DONE
+STATIC_DONE
+results/cache/

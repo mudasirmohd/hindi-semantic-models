@@ -24,7 +24,7 @@ import sys
 import time
 from multiprocessing import Pool
 
-HINEXSUM_CODE = "/home/mudasir/projects/hindi-summarizer/code"
+HINEXSUM_CODE = os.path.join(os.environ.get("HINEXSUM_HOME", os.path.expanduser("~/projects/hindi-summarizer")), "code")
 sys.path.insert(0, HINEXSUM_CODE)
 from hinexsum import preprocessing as pp  # noqa: E402
 

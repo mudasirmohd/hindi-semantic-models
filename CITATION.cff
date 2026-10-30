@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use these models, please cite them as below, and also cite HinExSum."
+title: "Hindi Semantic Models: Word2Vec, fastText and BERT trained on a cleaned Hindi corpus"
+type: software
+authors:
+  - family-names: Khan
+    given-names: Showket Ahmad
+    affiliation: "Department of Computer Sciences, South Campus, University of Kashmir"
+  - family-names: Mohd
+    given-names: Mudasir
+    affiliation: "Department of Computer Sciences, South Campus, University of Kashmir"
+  - family-names: Khanday
+    given-names: Hilal Ahmad
+    affiliation: "Department of Computer Sciences, South Campus, University of Kashmir"
+version: 1.0.0
+date-released: 2026-10-30
+license: MIT
+repository-code: "https://github.com/mudasirmohd/hindi-semantic-models"
+keywords: [Hindi, word embeddings, Word2Vec, fastText, BERT, summarization, low-resource NLP]
+references:
+  - type: article
+    title: "HinExSum: Hindi extractive text summarization using word embeddings"
+    authors:
+      - {family-names: Khan, given-names: Showket Ahmad}
+      - {family-names: Mohd, given-names: Mudasir}
+      - {family-names: Sheikh, given-names: Nasrullah}
+      - {family-names: Wani, given-names: Mohsin Altaf}
+      - {family-names: Wani, given-names: Abid Hussain}
+      - {family-names: Khanday, given-names: Hilal Ahmad}
+      - {family-names: Wani, given-names: Niyaz Ahmad}
+    journal: "Software Impacts"
+    volume: 30
+    start: 100872
+    year: 2026
+    doi: "10.1016/j.simpa.2026.100872"
