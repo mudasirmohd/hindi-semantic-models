@@ -13,6 +13,7 @@ authors:
     given-names: Hilal Ahmad
     affiliation: "Department of Computer Sciences, South Campus, University of Kashmir"
 version: 1.0.0
+doi: "10.5281/zenodo.23794581"
 date-released: 2026-10-30
 license: MIT
 repository-code: "https://github.com/mudasirmohd/hindi-semantic-models"

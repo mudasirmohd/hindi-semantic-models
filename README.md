@@ -1,5 +1,7 @@
 # Hindi Semantic Models
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23794581.svg)](https://doi.org/10.5281/zenodo.23794581)
+
 Distributional semantic models for Hindi: four static embedding models (Word2Vec and fastText,
 skip-gram, 300-d) and a compact Hindi BERT pre-trained from scratch. All were trained on a cleaned
 Hindi corpus from which every sentence of the XL-Sum Hindi and ILSUM Hindi evaluation data was removed.
@@ -18,7 +20,8 @@ University of Kashmir).
 | `hi-bert-medium` | BERT, MLM, 8 layers, 512 hidden, 42.16 M parameters | punctuated text | 32,000 WordPiece | `hi-bert-medium.tar.gz` |
 
 See [MODEL_CARD.md](MODEL_CARD.md) for training data, preprocessing, hyperparameters, evaluation and
-limitations. Checksums are in `SHA256SUMS` on the release page.
+limitations. Checksums are in `SHA256SUMS` on the release page. The release is archived on Zenodo:
+[doi:10.5281/zenodo.23794581](https://doi.org/10.5281/zenodo.23794581).
 
 ## Usage
 
