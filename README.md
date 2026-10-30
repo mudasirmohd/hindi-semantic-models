@@ -105,6 +105,9 @@ The scripts assume HinExSum is checked out at `~/projects/hindi-summarizer` (ove
 
 ## Licence
 
+`results/summaries/` contains system summaries, which are sentences extracted from XL-Sum Hindi
+(CC BY-NC-SA 4.0) and ILSUM 2.0 Hindi articles; that text remains under the licences of those datasets.
+
 Code: MIT ([LICENSE](LICENSE)). Models: CC BY-SA 4.0 ([LICENSE-MODELS.md](LICENSE-MODELS.md)), because
 part of the training text is Hindi Wikipedia (CC BY-SA); the IndicCorp v2 portion is CC0.
 
